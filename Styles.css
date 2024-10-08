@@ -1,0 +1,254 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+
+body {
+     font-family: "Times New Roman", Times, serif;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.main {
+    min-height: 100vh;
+    width: 100%;
+    margin-left:70px;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    background-color: #ffffff;
+    
+}
+
+#sidebar {
+    width: 70px;
+    min-width: 70px;
+    min-height: 100%;
+    max-height:100vh;
+    z-index: 1000;
+    transition: all .25s ease-in-out;
+    background-color: #8f630a;
+    display: flex;
+    flex-direction: column;
+    position:fixed;
+}
+
+#sidebar.expand {
+    width: 260px;
+    min-width: 260px;
+}
+
+
+.toggle-btn {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    padding: 1rem 1.5rem;
+}
+
+.toggle-btn i {
+    font-size: 1.5rem;
+    color: #FFF;
+}
+
+.sidebar-logo {
+    margin: auto 0;
+}
+
+.sidebar-logo a {
+    color: #FFF;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
+    display: none;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+    flex: 1 1 auto;
+}
+
+a.sidebar-link {
+    padding: .625rem 1.625rem;
+    color: #FFF;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+    font-size: 1.1rem;
+    margin-right: .75rem;
+}
+
+a.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, .075);
+    border-left: 3px solid #f3c058;
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    background-color:#f3c058;
+    padding: 0;
+    min-width: 10rem;
+    display: none;
+}
+
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+    display: block;
+    max-height: 15em;
+    width: 100%;
+    opacity: 1;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+    transition: all .2s ease-out;
+}
+/* Style for the pagination bar */
+.pagination .page-link {
+    background-color: #ffffff; /* Background color for pagination links */
+    color: black; /* Text color for pagination links */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    border: none; /* Remove border */
+    outline: none;
+    box-shadow: none; /* Removes the box shadow around the link */
+    border: none; /* Removes any border */
+}
+
+.pagination .page-link:hover {
+    
+    color: #ffffff; /* Text color on hover */
+    border: none; /* Ensure no border on hover */
+}
+
+/* Style for the active page button */
+.pagination .active .page-link {
+    
+    color: #000; /* Text color for active page */
+    border: none; /* Remove border for active page */
+}
+
+/* Style for the disabled page button */
+.pagination .disabled .page-link {
+    background-color: #ffffff; /* Disabled background color */
+    color: #999999; /* Disabled text color */
+    border: none; /* Remove border for disabled page */
+}
+
+/* Customize the icon colors for previous/next buttons */
+.pagination .page-link i {
+    color: black; /* Icon color */
+}
+
+.pagination .disabled .page-link i {
+    color: #999999; /* Disabled icon color */
+}
+.btn2 {
+  border-radius: 5px;
+  border: 1px solid #483205;
+  width: 100px;
+  height: 37px;
+}
+
+.btn2:hover {
+  background-color: #483205;
+  color: white;
+}
+
+.btn3 {
+
+  background: #8f630a;
+  border-radius: 5px;
+  border: 1px solid #483205;
+  width: 90px;
+  height: 37px;
+  color: white;
+}
+.btn3:hover{
+  background: #483205;
+  border-radius: 5px;
+  border: 1px solid #483205;
+  width: 90px;
+  height: 37px;
+  color: white;
+}
+.btnActionCancel{
+  border-radius: 5px;
+  border: 1px solid #483205;
+  width: 90px;
+  height: 37px;
+}
+
+.btnActionCancel:hover{
+	border-radius: 5px;
+  border: 1px solid #483205;
+  width: 90px;
+  height: 37px;
+}
+
+.form-select {
+    max-width: 100%;  /* Ensures the select box doesn't overflow the container */
+    width: 100%;      /* Make it responsive to fit the container */
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        
+        height: 100vh;
+        z-index: 1000;
+       
+    }
+
+	#sidebar.expand {
+        width: 100vw;
+    }
+    
+    .form-select {
+        max-width: 90%;  
+    }
+}
+

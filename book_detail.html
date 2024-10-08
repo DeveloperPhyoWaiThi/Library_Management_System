@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/images/stamp.png">
+    <style>
+    li{
+      padding-top:7px;
+    }
+    </style>
+</head>
+<body>
+	
+   <div th:include="navBar :: navbar"></div>
+	<br><br><br><br>
+	<div class="mx-auto w-75 mb-4">
+	    <div class="row">
+	        
+	        <div class=" col-md-4">
+	            <img th:src="@{'/uploads/'+${book.image}}" alt="Book Cover" class="shadow rounded-end" width="280px" height="100%">
+	        </div>
+	        
+	        <div class="col-md-8">
+	            
+	            <h2 th:text="${book.title}">Book Title</h2>
+	            
+	            <p th:text="${book.description}" style="text-align:justify;">Book Description</p>
+	            
+				 <ul >
+				 	<li><strong>ISBN Number:</strong> <span th:text="${book.bookISBNNumber}"></span></li>
+				 	<li><strong>Price:</strong> <span th:text="${book.price}">Price</span></li> 
+				 	<li>
+					    <span th:if="${#lists.size(book.authors) > 1}"> <b>Authors:</b>
+					        <span th:each="author, iterStat : ${book.authors}">
+					            <span th:text="${author.authorName}"></span>
+					            <span th:if="${!iterStat.last}">, </span>
+					        </span>
+					    </span>
+					    <span th:if="${#lists.size(book.authors) == 1}"> <b>Author:</b>
+					        <span th:text="${book.authors[0].authorName}"></span>
+					    </span>
+					</li>
+					<li><strong>Category:</strong><span th:text="${book.category.categoryName}"></span></li>
+					<li><strong>Pages:</strong> <span th:text="${book.pages}"></span></li>
+					<li><strong>Published Date:</strong> <span th:text="${book.publishedDate}"></span></li>
+	            </ul>
+	            
+	           	<div class="action-buttons ms-2">
+	           	    
+                	<div class="d-flex justify-content-start m-2 ">
+			    	
+			    	<a class="btn btnActionCancel me-2" href="/">Cancel</a>
+			    	<a th:href="@{/user/borrow/{bookId}(bookId=${book.bookId})}" id="borrowButton" class=" btn btn1">Borrow</a>
+			    </div>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
+				        
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        You need to log in to borrow this book.
+				      </div>
+				      <div class="modal-footer">
+				        <a href="/user/login" class="btn btn1" >Login</a>
+				        
+				      </div>
+				    </div>
+				  </div>
+				</div>
+								
+	        </div>
+	    </div>
+	    
+	    <span id="userLoggedIn" th:text="${session.user != null}" style="display:none;"></span>
+	</div>
+	<div th:include="footer :: footer"></div>
+	<script>
+	    document.getElementById("borrowButton").addEventListener("click", function(event){
+	    	
+	    	var userLoggedIn = document.getElementById("userLoggedIn").textContent === 'true';
+	        if (!userLoggedIn) {
+	        	console.log(userLoggedIn)
+	            event.preventDefault(); 
+	            $('#loginModal').modal('show'); 
+	        }
+	        else {
+                window.location.href = '/borrow';
+            }
+	    });
+	</script>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

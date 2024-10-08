@@ -1,0 +1,79 @@
+<div th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-light">
+	        <div class="container">
+	        	<img src="/images/stamp.png" alt="Readsphere Logo" class="logo" width="58" height="58">
+	            <a class="navbar-brand" th:href="@{/}" style="font-family:'Brush Script MT', cursive;">ReadSphere</a>
+	            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	                <span class="navbar-toggler-icon"></span>
+	            </button>
+	            <div class="collapse navbar-collapse" id="navbarNav">
+	            	
+	                <ul class="navbar-nav ms-auto">
+	                	<li class="nav-item">
+	       
+	                        	<a 
+	                        	   class="nav-link active"
+	                        	   th:classappend="${page == 'home' ? 'active fw-bold' : ''}"
+	                        	   th:href="@{/}"
+	                        	   >Home
+								</a>
+	                        	
+	                    </li>
+	                    <li class="nav-item">
+	                    <span  th:if="${session.user}">
+	                    	<span th:if="${session.user.isAdmin}">
+	                    		<a class="nav-link" th:href="@{/admin/}">Dashboard</a>
+	                    	</span>
+	                    </span>
+                    </li>
+                    
+                    <li class="nav-item">
+	                    <span  th:if="${session.user}">
+	                    	<span th:if="${session.user.transactionCounts>0}">
+	                    		<a class="nav-link" th:href="@{/user/returnBook}">ReturnBook</a>
+	                    	</span>
+	                    </span>
+                    </li>
+	                   
+	                    <!-- <li class="nav-item">
+	                        <a class="nav-link" th:href="@{/user/contact}" th:classappend="${page == 'contact' ? 'active fw-bold' : ''}">Contact Us</a>
+	                    </li> -->
+	                    <li class="nav-item">
+	                        <a class="nav-link" th:href="@{/user/about}" th:classappend="${page == 'about' ? 'active fw-bold' : ''}">About Us</a>
+	                    </li>
+	                   
+	                     <li class="nav-item">
+	                    <span  th:if="${session.user == null}">
+	                    	<a class="nav-link" th:href="@{/user/login}" th:classappend="${page == 'signin' ? 'active fw-bold' : ''}">Sign In</a>
+	                    </span>
+                    </li>
+                    <li class="nav-item">
+                    	<span th:if="${session.user == null}">
+                    		<a class=" nav-link" th:href="@{/user/register}" th:classappend="${page == 'register' ? 'active fw-bold' : ''}">Get Started</a>
+                    	</span>
+                    </li>
+                    
+                    <li class="nav-item">
+				        <a class="nav-link" href="#" th:if="${session.user}">
+				          <img th:src="@{'/profiles/'+${session.user.userImg}}" alt="Profile" class="rounded-circle" width="30px" height="30px" >
+				        </a>
+				    </li>
+				    
+                    <li class="nav-item">
+                    	<a class="nav-link" href="/user/userProfile" th:if="${session.user}" >
+                    		<span  th:text="${session.user.name}"></span>
+                    	</a>
+                    </li>
+                    <li class="nav-item">
+	                    <span  th:if="${session.user}">
+	                    <a class="nav-link" th:href="@{/user/logout}">Logout</a>
+	                    </span>
+                    </li>
+                    
+                    
+                    
+	                </ul>
+	            </div>
+	        </div>
+	    </nav>
+</div>

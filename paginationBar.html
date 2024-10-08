@@ -1,0 +1,56 @@
+<!-- <div th:fragment="paginationbar">
+	<nav class="d-flex justify-content-center" aria-label="Page navigation">
+	    <ul class="pagination">
+	
+	        Previous Page Button: Disabled if on the first page
+	        <li class="page-item" th:classappend="${books.hasPrevious()} ? '' : 'disabled'">
+	            <a class="page-link" th:href="@{|/?page=${books.number - 1}&keyword=${keyword != null ? keyword : ''}|}" aria-label="Previous">
+	                <i class="bi bi-chevron-left"></i>
+	            </a>
+	        </li>
+	
+	        Display each page number dynamically based on total pages
+	        <li class="page-item" th:each="pageNum : ${#numbers.sequence(0, books.totalPages - 1)}"
+	            th:classappend="${pageNum == books.number} ? 'active' : ''">
+	            <a class="page-link" th:href="@{|/?page=${pageNum}&keyword=${keyword != null ? keyword : ''}|}" th:text="${pageNum + 1}"></a>
+	        </li>
+	
+	        Next Page Button: Disabled if on the last page
+	        <li class="page-item" th:classappend="${books.hasNext()} ? '' : 'disabled'">
+	            <a class="page-link" th:href="@{|/?page=${books.number + 1}&keyword=${keyword != null ? keyword : ''}|}" aria-label="Next">
+	                <i class="bi bi-chevron-right"></i>
+	            </a>
+	        </li>
+	
+	    </ul>
+	</nav>
+
+</div> -->
+
+<div th:fragment="paginationbar">
+    <nav class="d-flex justify-content-center" aria-label="Page navigation">
+        <ul class="pagination">
+            
+            <!-- Previous Page Button: Disabled if on the first page -->
+            <li class="page-item" th:classappend="${books.hasPrevious()} ? '' : 'disabled'">
+                <a class="page-link" th:href="@{|/?page=${books.number - 1}&keyword=${keyword != null ? keyword : ''}|}" aria-label="Previous">
+                    <i class="bi bi-chevron-left" style="font-size:1.3em;"></i>
+                </a>
+            </li>
+ 
+            <!-- Current Page / Total Pages with consistent borders -->
+                    <div class="d-flex justify-content-center align-items-center">
+                        <span th:text="${books.number + 1}"></span> <!-- Current Page -->
+                        <span style="margin: 0 5px;">/</span> <!-- Divider -->
+                        <span th:text="${books.totalPages}"></span> <!-- Total Pages -->
+                    </div>
+ 
+            <!-- Next Page Button: Disabled if on the last page -->
+            <li class="page-item" th:classappend="${books.hasNext()} ? '' : 'disabled'">
+                <a class="page-link" th:href="@{|/?page=${books.number + 1}&keyword=${keyword != null ? keyword : ''}|}" aria-label="Next">
+                    <i class="bi bi-chevron-right" style="font-size:1.3em;"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

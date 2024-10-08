@@ -1,0 +1,125 @@
+<div th:fragment="sideBar">
+
+	<aside id="sidebar">
+		<div class="d-flex">
+			<button class="toggle-btn" type="button">
+				<i class="lni lni-grid-alt"></i>
+			</button>
+			<div class="sidebar-logo">
+				<a href="#">Admin</a>
+			</div>
+		</div>
+		<ul class="sidebar-nav">
+			
+			<li class="sidebar-item"><a href="/admin/" class="sidebar-link"> <i
+					class="lni lni-dashboard"></i> <span>Dashboard</span>
+			</a></li>
+			<li class="sidebar-item"><a href="/admin/userlist" class="sidebar-link"> <i
+					class="lni lni-users"></i> <span>Users</span>
+			</a></li>
+			<li class="sidebar-item"><a href=""
+				class="sidebar-link collapsed has-dropdown"
+				data-bs-toggle="collapse" data-bs-target="#multi"
+				aria-expanded="false" aria-controls="multi"> <i
+					class="lni lni-book"></i> <span>Books</span>
+			</a>
+				<ul id="multi" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="/admin/booklist" class="sidebar-link">All Books</a></li>
+					
+				</ul>
+				<ul id="multi" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="#"
+						class="sidebar-link collapsed" data-bs-toggle="collapse"
+						data-bs-target="#multi-two" aria-expanded="false"
+						aria-controls="multi-two"> Actions </a>
+						<ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+							<li class="sidebar-item"><a href="/admin/bookActionForm?mode=add" class="sidebar-link">Create
+									Book</a></li>
+
+						</ul></li>
+				</ul></li>
+				
+				
+			<li class="sidebar-item"><a href=""
+				class="sidebar-link collapsed has-dropdown"
+				data-bs-toggle="collapse" data-bs-target="#multi1"
+				aria-expanded="false" aria-controls="multi"> <i
+					class="fas fa-sitemap"></i> <span>Categories</span>
+			</a>
+				<ul id="multi1" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="/admin/categoryList" class="sidebar-link">All Categories</a></li>
+					
+				</ul>
+				<ul id="multi1" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="#"
+						class="sidebar-link collapsed" data-bs-toggle="collapse"
+						data-bs-target="#multi-two" aria-expanded="false"
+						aria-controls="multi-two"> Actions </a>
+						<ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+							<li class="sidebar-item"><a href="/admin/categoryActionForm?mode=add" class="sidebar-link">Create
+									Category</a></li>
+
+						</ul></li>
+				</ul></li>
+			<li class="sidebar-item"><a href=""
+				class="sidebar-link collapsed has-dropdown"
+				data-bs-toggle="collapse" data-bs-target="#multi2"
+				aria-expanded="false" aria-controls="multi"> <i
+					class="lni lni-user"></i> <span>Authors</span>
+			</a>
+				<ul id="multi2" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="/admin/authorlist" class="sidebar-link">All Authors</a></li>
+					
+				</ul>
+				<ul id="multi2" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="#"
+						class="sidebar-link collapsed" data-bs-toggle="collapse"
+						data-bs-target="#multi-two" aria-expanded="false"
+						aria-controls="multi-two"> Actions </a>
+						<ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+							<li class="sidebar-item"><a href="/admin/authorActionForm?mode=add" class="sidebar-link">Create
+									Author</a></li>
+
+						</ul></li>
+				</ul></li>
+			<li class="sidebar-item"><a href="#"
+				class="sidebar-link collapsed has-dropdown"
+				data-bs-toggle="collapse" data-bs-target="#transaction"
+				aria-expanded="false" aria-controls="auth"> <i class="fas fa-chart-line"></i> <span>Borrow History</span>
+			</a>
+				<ul id="transaction" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="/admin/borrowHistorylist" class="sidebar-link">All Borrow History</a></li>
+					
+				</ul></li>
+			
+			<li class="sidebar-item">
+				<a href="#"
+					class="sidebar-link collapsed has-dropdown"
+					data-bs-toggle="collapse" data-bs-target="#requests"
+					aria-expanded="false" aria-controls="auth"> <i class='far fa-comment-alt'></i> <span>Requests</span>
+				</a>
+				<ul id="requests" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="/admin/requestList?keyword=pending" class="sidebar-link">Borrow Requests</a></li>
+					
+				</ul>
+				<ul id="requests" class="sidebar-dropdown list-unstyled collapse"
+					data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a href="/admin/requestList?keyword=return" class="sidebar-link">Return Requests</a></li>
+					
+				</ul>
+			</li>
+
+		</ul>
+		<div class="sidebar-footer">
+			<a href="/user/logout" class="sidebar-link"> <i class="lni lni-exit"></i> <span>Logout</span>
+			</a>
+		</div>
+	</aside>

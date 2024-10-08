@@ -1,0 +1,378 @@
+@charset "UTF-8";
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Times New Roman", Times, serif;
+ 	background-color:light-gray;
+}
+
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.navbar {
+	position: fixed;
+	width: 100%;
+	background-color: #f5c96d;
+	z-index:1000;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+.book-list {
+	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center; 
+	gap: 30px; 
+	padding: 20px;
+}
+
+
+.book-card {
+	
+	width: 210px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+.book-card img {
+	
+	width: 90%;
+	height: 250px;
+	object-fit: cover;
+	border-radius: 8px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.description-container {
+	
+	text-align: center;
+	margin-top: 15px; 
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.description-container .title {
+	
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+}
+
+.description .extra-info {
+	
+	font-size: 14px;
+	color: #555;
+	margin-top: 10px;
+}
+
+.details-btn {
+	
+	background-color: #f5c96d; 
+	color: black;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-transform: capitalize;
+	font-size: 14px;
+	transition: background-color 0.3s ease;
+}
+
+.details-btn:hover {
+	
+	background-color: #D68232;
+	color:white;
+}
+
+@media ( max-width : 768px) {
+	
+	.book-list {
+		flex-direction: column;
+		align-items: center; 
+	}
+	.book-card {
+		width: 100%; 
+	}
+}
+
+footer {
+	background-color: #f5c96d; 
+	padding: 10px 0;
+	text-align: center;
+	font-size: 16px;
+}
+
+footer a {
+    color: #000;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+footer a:hover {
+    color: white;
+}
+
+footer img{
+	width: 30px;
+	height:30px;
+}
+
+/* Search Section */
+.search-section {
+    
+    padding: 40px 0;
+}
+
+.search-section .container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.search-section form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-section input[type="search"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ced4da;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+.search-section input[type="search"]:focus {
+    border-color: #f3e5ab; 
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 102, 0.25);
+}
+
+.search-section button {
+    padding: 12px 30px;
+    background-color:#f5c96d; 
+    color: #000;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-section button:hover {
+    background-color: #D68232;
+    color:white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-section form {
+        flex-direction: column;
+    }
+
+    .search-section input[type="search"] {
+        margin-bottom: 15px;
+    }
+
+    .search-section button {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+.welcome-section {
+    background: linear-gradient(to top, #f5c96d, #996633);
+    padding: 50px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  	border-radius:10px 0 0 10px;
+}
+
+.card {
+	
+  max-width:100%;
+  overflow:hidden;
+  border-radius: 10px; /* Optional: add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    
+}
+
+.welcome-content h2,h3 {
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.brand {
+    color: #fff;
+}
+
+.welcome-content p {
+    color: #fff;
+    margin-top: 20px;
+}
+
+.images img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.form-section {
+    padding: 50px;
+}
+
+.form-container h2 {
+    font-weight: bold;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+
+
+#filterForm {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#categoryDropdown {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ced4da;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+#categoryDropdown:focus {
+    border-color: #3333cc; /* Focus border color */
+    box-shadow: 0 0 0 0.2rem rgba(51, 51, 204, 0.25); /* Focus shadow */
+}
+
+#categoryDropdown option {
+    color: #333;
+}
+
+.form-select {
+    max-width: 100%;  
+    width: 100%;      
+}
+
+@media (max-width: 768px) {
+    .form-select {
+        max-width: 50%;  
+    }
+    
+    .welcome-section {
+        padding: 30px;
+        width:100%;
+        border-radius: 10px 10px 0 0; /* Adjust border radius for small screens */
+    }
+}
+
+/* Style for the pagination bar */
+.pagination .page-link {
+    background-color: #ffffff; /* Background color for pagination links */
+    color: black; /* Text color for pagination links */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    border: none; /* Remove border */
+    outline: none;
+    box-shadow: none; /* Removes the box shadow around the link */
+    border: none; /* Removes any border */
+}
+
+.pagination .page-link:hover {
+    
+    color: #ffffff; /* Text color on hover */
+    border: none; /* Ensure no border on hover */
+}
+
+/* Style for the active page button */
+.pagination .active .page-link {
+    
+    color: #000; /* Text color for active page */
+    border: none; /* Remove border for active page */
+}
+
+/* Style for the disabled page button */
+.pagination .disabled .page-link {
+    background-color: #ffffff; /* Disabled background color */
+    color: #999999; /* Disabled text color */
+    border: none; /* Remove border for disabled page */
+}
+
+/* Customize the icon colors for previous/next buttons */
+.pagination .page-link i {
+    color: black; /* Icon color */
+}
+
+.pagination .disabled .page-link i {
+    color: #999999; /* Disabled icon color */
+}
+
+.btn1 {
+		  border-radius: 5px;
+		  border: 1px solid #f5c96d;
+		  width: 90px;
+		  padding-top:5px;
+		  text-decoration:none;
+		  text-align:center;
+		  color:black;
+		  background-color: #f5c96d;
+		}
+		
+		.btn1:hover {
+		  background-color: #d68232;
+		  color: white;
+		  cursor:pointer;
+		}
+		
+.btnActionCancel{
+  border-radius: 5px;
+  border: 1px solid #483205;
+  width: 90px;
+  height: 37px;
+}
+
+.btnActionCancel:hover{
+	border-radius: 5px;
+  border: 1px solid #483205;
+  width: 90px;
+  height: 37px;
+}

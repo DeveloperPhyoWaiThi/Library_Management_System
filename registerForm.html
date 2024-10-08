@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Register</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/images/stamp.png">
+	<style type="text/css">
+		.img-thumbnail {
+            margin-top: 1rem;
+            border-radius: 4px;
+            max-width: 200px;
+            display: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-title {
+            color: #2C3E50;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+	</style>
+</head>
+
+<body>
+	<div th:include="navBar :: navbar"></div><br><br><br>
+	<div class="card mx-auto mb-3 " style="width:60%;">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 welcome-section">
+                <div class="welcome-content">
+                   
+                    <img src="/images/stamp.png" alt="Readsphere Logo" class="rounded mx-auto d-block" width="200" height="200">
+                    <h2>Welcome to <span class="brand">ReadSphere</span></h2>
+                    <p>Our goal is to provide you with a variety of books and services that will enhance your reading journey.</p>
+                    <div class="images">
+                        <img src="/images/image.jfif" alt="Book 1">
+                        <img src="/images/image2.jfif" alt="Book 2">
+                        <img src="/images/image3.png" alt="Book 3">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7  col-sm-12 form-section">
+                <div class="form-container">
+                    <h2>Get Started</h2>
+                    <small>Already have an account? <a th:href="@{/user/login}" style=" color:#D68232;">Sign In</a></small>
+                    
+                    <form action="/user/postRegister"  class="mt-3" method="post" th:object="${userRegister}" enctype="multipart/form-data">
+						
+						
+				    	<div class="form-group mb-3">
+				        	<label for="registerName">Name</label>
+				            <input type="text" class="form-control" id="registerName" placeholder="Enter name" th:field="*{name}">
+				            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
+				        </div>
+                        
+				        <div class="form-group mb-3">
+				             <label for="registerEmail">Email address</label>
+				             <input type="email" class="form-control" id="registerEmail" placeholder="Enter email" th:field="*{email}">
+				             <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+				             <div th:if="${emailErr}" th:text="${emailErr}" class="text-danger"></div>
+				        </div>
+				        
+				        <div class="form-group mb-3">
+				             <label for="registerPhone">Phone Number</label>
+				             <input type="text" class="form-control" id="registerPhone" placeholder="Enter Phone Nubmer" th:field="*{phoneNo}">
+				             <div th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}" class="text-danger"></div>
+				             <div th:if="${phoneErr}"class="text-danger">
+				             	<span th:text="${phoneErr}"></span>
+				             </div>
+				        </div>
+				        
+				        <label for="registerPhone">Gender</label><br>
+				        	<div th:each="gender : ${genders}" class="form-check form-check-inline">
+					            <input class="form-check-input" type="radio" name="gender" th:id="'inlineRadio' + ${gender.ordinal()}" th:value="${gender.name()}" th:field="*{gender}">
+					            <label class="form-check-label" th:for="'inlineRadio' + ${gender.ordinal()}" th:text="${gender.name()}"></label>
+				        	</div>
+				        	<div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="text-danger"></div>
+				        <br>
+				        
+				        <div class="form-group mb-3">
+				            <label for="coverImage" class="form-label">Profile Image:</label>
+				            <input type="file" id="coverImage" name="img" class="form-control" accept="image/*" onchange="previewImage(event)" />
+					        
+					        <div class="mb-3 text-center">
+					            <img id="imagePreview" src="#" alt="Cover Image Preview" class="img-thumbnail" />
+					        </div>
+				        </div>
+			
+				        <div class="form-group mb-3">
+				             <label for="registerPassword">Password</label>
+				             <input type="password" class="form-control" id="registerPassword" placeholder="Enter Password" th:field="*{password}">
+				             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></div>
+				             <div th:if="${passwordErr}"class="text-danger">
+				             	<span th:text="${passwordErr}"></span>
+				             </div>
+				        </div>
+				        <div class="form-group mb-3">
+				             <label for="registerConfirmPassword">Confirm Password</label>
+				             <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Enter Confirm Password" th:field="*{confirmPassword}">
+				             <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="text-danger"></div>
+				             <div th:if="${passwordConfirmErr}"class="text-danger">
+				             	<span th:text="${passwordConfirmErr}"></span>
+				             </div>
+				        </div>
+				        
+				        <div class="d-flex justify-content-end">
+				        	<a href="/" class="btn btnActionCancel me-2">Cancel</a>
+					  		<button type="submit" class="btn btn1">Register</button>
+					    </div>
+				     </form> 
+                </div>
+                </div>
+            </div>
+       </div>
+	<div th:include="footer :: footer"></div>
+	
+	          
+	<script>
+        function previewImage(event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>        
+	<script src="/js/alert.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

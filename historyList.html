@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borrow History</title>
+<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/Styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link rel="icon" href="/images/stamp.png">
+</head>
+<body>
+	<div class="wrapper">
+	<div th:include="adminSideBar :: sideBar"></div>
+        <div class="main">
+        
+            <div style="background-color:#f3c058; width:100%;" class="shadow-sm">
+            	<div th:include="navBar :: navbar"></div>
+            </div>
+            <div class="p-2 ">
+            	<div class="container mt-1"> 
+            		<div th:include="alertMessage :: alert " class="mt-3"></div>
+            		<h1 class="mb-4">Book Borrowing History</h1>
+	                <div class="mb-4" >
+	                <div class="d-flex flex-column flex-md-row justify-content-between">
+	                	<div class="d-flex justify-content-start mb-2 mb-md-0">
+	                    	<a th:href="@{|/admin/|}" class="btn btn2 w-md-auto"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+	                	</div>
+	                	<div class="d-flex justify-content-start">
+		                	<form id="filterForm" class="d-flex flex-md-row align-items-center w-100">
+		                        <div class="dropdown  w-md-auto" >
+							        <select class="form-select" id="categoryDropdown" name="status">
+							            <option value="" disabled selected>Filter by Status...</option>
+							            <option value="all" th:selected="${status == 'all'}">All</option>
+							            <option value="complete" th:selected="${status == 'complete'}">Complete</option>
+							            <option value="pending" th:selected="${status == 'pending'}">Pending</option>
+							        </select>
+							    </div>
+		    
+		                        <button type="submit" class="btn btn3 ms-2  w-md-auto">Filter</button>
+		                    </form>
+	                	</div>
+	                	</div>
+	                </div>
+	                <div  th:unless="${emptyTransaction}">
+	                	<div class="table-responsive">
+			                <table class="table table-striped table-bordered shadow-sm table-responsive">
+						    <thead>
+						        <tr>
+						        	<th>Id</th>
+						        	<th>Borrower</th>
+						            <th>Book Name</th>
+						            <th>Borrow Date</th>
+						            <th>Due Date</th>
+						            <th>Status</th>
+						            <th>Notify</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr th:each="transaction : ${transactions}">
+						            <td th:text="${transaction.transactionId}"></td>
+						            <td th:text="${transaction.userName}"></td>
+						            <td th:text="${transaction.bookTitle}"></td>
+						            <td th:text="${transaction.borrowDate}"></td>
+						            <td th:text="${transaction.dueDate}"></td>
+						            <td th:text="${transaction.status}"></td>
+						            
+						            <td>
+								        
+								    	<a th:if="${transaction.overDue || transaction.nearDue}"  th:href="@{|/admin/notifyUser?transactionId=${transaction.transactionId}&mode=${transaction.overDue ? 'overDue':'nearDue'}|}" class="btn btn-outline-warning btn-sm">
+			                                    <i class="fas fa-bell"></i> Notify
+			                                </a>
+								    </td>
+						        </tr>
+						    </tbody>
+						</table>
+					</div>
+					<nav class="d-flex justify-content-end" aria-label="Page navigation">
+			        <ul class="pagination pagination-sm">
+			
+			            <!-- Previous Page Button: Disabled if on the first page -->
+			            <li class="page-item" th:classappend="${transactionsPage.hasPrevious()} ? '' : 'disabled'">
+			                <a class="page-link" th:href="@{|/admin/borrowHistorylist?page=${transactionsPage.number - 1}&status=${status != null? status:'all'}|}" aria-label="Previous">
+			                    <i class="bi bi-chevron-left"></i>
+			                </a>
+			            </li>
+			
+			
+			            
+			            <div class="d-flex justify-content-center align-items-center">
+	                        <span th:text="${transactionsPage.number + 1}"></span> <!-- Current Page -->
+	                        <span style="margin: 0 5px;">/</span> <!-- Divider -->
+	                        <span th:text="${transactionsPage.totalPages}"></span> <!-- Total Pages -->
+	                    </div>
+			
+			            <!-- Next Page Button: Disabled if on the last page -->
+			            <li class="page-item" th:classappend="${transactionsPage.hasNext()} ? '' : 'disabled'">
+			                <a class="page-link" th:href="@{|/admin/borrowHistorylist?page=${transactionsPage.number + 1}&status=${status != null? status:'all'}|}" aria-label="Next">
+			                    <i class="bi bi-chevron-right"></i>
+			                </a>
+			            </li>
+			
+			        </ul>
+    			</nav>
+
+	          </div>
+	          
+	          <div th:if="${emptyTransaction}">
+	          	<p class="text-center" th:text="'There is no '+ ${status}+' circulations.'"></p>
+	          </div>
+            	</div>
+         	</div>
+     	</div>   
+     </div>	 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+     <script>
+	    function sendNotification(transactionId) {
+	        fetch('/admin/notifyUser/' + transactionId, {
+	            method: 'POST'
+	        }).then(response => {
+	            if (response.ok) {
+	                alert('Notification sent successfully!');
+	            } else {
+	                alert('Failed to send notification.');
+	            }
+	        });
+	    }
+	</script>
+    <script src="/js/script.js"></script>
+    <script src="/js/alert.js"></script>
+</body>
+</html>
